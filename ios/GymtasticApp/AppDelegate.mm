@@ -15,6 +15,14 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 
 #import <react/config/ReactNativeConfig.h>
+// Auth0 Config
+#import <React/RCTLinkingManager.h>
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [RCTLinkingManager application:app openURL:url options:options];
+}
 
 static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 

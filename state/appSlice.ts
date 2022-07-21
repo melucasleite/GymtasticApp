@@ -16,6 +16,7 @@ const appSlice = createSlice({
     addItemDialogVisible: false,
     editItemDialogVisible: false,
     checkinDialogVisible: false,
+    accessToken: null,
   },
   reducers: {
     setAddItemDialogVisible(state, action: any) {
@@ -29,6 +30,9 @@ const appSlice = createSlice({
     },
     setEditItem(state, action: any) {
       state.editItem = action.payload;
+    },
+    setAccessToken(state, action: any) {
+      state.accessToken = action.payload;
     },
   },
   extraReducers: {
@@ -47,4 +51,5 @@ export const {
   setCheckinDialogVisible,
   setEditItemDialogVisible,
   setEditItem,
+  setAccessToken,
 } = appSlice.actions;

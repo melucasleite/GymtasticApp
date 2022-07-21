@@ -17,7 +17,6 @@ const ActionFab = () => {
     auth0.webAuth
       .clearSession({})
       .then((success: any) => {
-        Alert.alert('Logged out!');
         dispatch(setAccessToken(null));
       })
       .catch((error: any) => {

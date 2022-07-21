@@ -1,5 +1,6 @@
 import {AnyAction} from '@reduxjs/toolkit';
 import React from 'react';
+import {useColorScheme} from 'react-native';
 import {Colors, Drawer, Text, View} from 'react-native-ui-lib';
 import {useDispatch} from 'react-redux';
 import {deleteExercise} from '../state/actions/deleteExercise';
@@ -14,6 +15,7 @@ export interface Item {
 }
 
 const ItemView = ({item}: {item: Item}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const dispatch = useDispatch();
   return (
     <>
@@ -35,8 +37,13 @@ const ItemView = ({item}: {item: Item}) => {
             dispatch(deleteExercise(item.id) as unknown as AnyAction);
           },
         }}>
-        <View centerV padding-s4 bg-white style={{height: 60}}>
-          <Text text70>
+        <View
+          centerV
+          padding-s4
+          bg-white={!isDarkMode}
+          bg-black={isDarkMode}
+          style={{height: 60}}>
+          <Text text70 white={isDarkMode}>
             {item.name} - {item.sets} x {item.reps} x {item.weigth}Lb
           </Text>
         </View>

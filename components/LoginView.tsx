@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setAccessToken} from '../state/appSlice';
 import {auth0} from './Authentication';
+import {audience} from '.././auth0-configuration';
 
 const LoginView = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const LoginView = () => {
     auth0.webAuth
       .authorize({
         scope: 'openid profile email',
+        audience,
       })
       .then((credentials: any) => {
         dispatch(setAccessToken(credentials.accessToken));

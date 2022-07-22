@@ -4,7 +4,8 @@ import {createExerciseReducer} from './actions/createExercise';
 import {deleteExerciseReducer} from './actions/deleteExercise';
 import {updateExerciseReducer} from './actions/updateExercise';
 import {createCheckinReducer} from './actions/createCheckin';
-import {fetchCheckins, fetchCheckinsReducer} from './actions/fetchCheckins';
+import {fetchCheckinsReducer} from './actions/fetchCheckins';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const appSlice = createSlice({
   name: 'message',
   initialState: {
@@ -33,6 +34,7 @@ const appSlice = createSlice({
     },
     setAccessToken(state, action: any) {
       state.accessToken = action.payload;
+      storeToken(action.payload);
     },
   },
   extraReducers: {
@@ -53,3 +55,12 @@ export const {
   setEditItem,
   setAccessToken,
 } = appSlice.actions;
+
+const storeToken = async (value: any) => {
+  await AsyncStorage.setItem('@accessToken', value);
+};
+
+export const getToken = async () => {
+  const value = await AsyncStorage.getItem('@accessToken');
+  return value;
+};

@@ -1,11 +1,25 @@
-const API_URL = 'https://gymtastic-api-214.herokuapp.com/api';
+const API_URL = 'http://localhost:8005/api';
 import axios from 'axios';
 import {Item} from '../components/ItemView';
+import {getToken} from '../state/appSlice';
 export const BASE_URI = API_URL;
 
 const client = axios.create({
   baseURL: BASE_URI,
 });
+
+client.interceptors.request.use(
+  async function (config: any) {
+    const token = await getToken();
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
 
 class ApiService {
   request(method: any, path: any, data = undefined, options = {}) {

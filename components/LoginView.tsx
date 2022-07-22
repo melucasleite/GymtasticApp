@@ -1,30 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setAccessToken} from '../state/appSlice';
-import {auth0} from './Authentication';
-import {audience} from '.././auth0-configuration';
+import {getToken, useOnLogin} from '../services/accessToken.service';
 
 const LoginView = () => {
   const dispatch = useDispatch();
-  const onLogin = () => {
-    auth0.webAuth
-      .authorize({
-        scope: 'openid profile email',
-        audience,
-      })
-      .then((credentials: any) => {
-        dispatch(setAccessToken(credentials.accessToken));
-      })
-      .catch((error: any) => console.log(error));
+  const {accessToken} = useSelector((state: any) => state.app);
+  const [loaded, setLoaded] = useState(false);
+  const onLogin = useOnLogin(dispatch);
+  const retrieveAccessTokenFromStorage = () => {
+    getToken().then(value => {
+      dispatch(setAccessToken(value));
+      setLoaded(true);
+    });
   };
+  useEffect(retrieveAccessTokenFromStorage, []);
 
   return (
-    <View style={styles.container}>
-      <Pressable style={styles.button} onPress={onLogin}>
-        <Text style={styles.buttonText}>Log In</Text>
-      </Pressable>
-    </View>
+    <>
+      {loaded && !accessToken ? (
+        <View style={styles.container}>
+          <Pressable style={styles.button} onPress={onLogin}>
+            <Text style={styles.buttonText}>Log In</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

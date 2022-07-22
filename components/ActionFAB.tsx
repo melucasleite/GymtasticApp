@@ -1,7 +1,7 @@
 import {SpeedDial} from '@rneui/base';
 import React from 'react';
-import {Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {storeToken} from '../services/accessToken.service';
 import {
   setAccessToken,
   setAddItemDialogVisible,
@@ -18,6 +18,7 @@ const ActionFab = () => {
       .clearSession({})
       .then((success: any) => {
         dispatch(setAccessToken(null));
+        storeToken(null);
       })
       .catch((error: any) => {
         console.log('Log out cancelled');

@@ -1,7 +1,7 @@
 const API_URL = 'http://localhost:8005/api';
 import axios from 'axios';
 import {Item} from '../components/ItemView';
-import {getToken} from '../state/appSlice';
+import {getToken} from './accessToken.service';
 export const BASE_URI = API_URL;
 
 const client = axios.create({

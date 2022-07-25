@@ -15,13 +15,18 @@ const StreakHeader = () => {
   return (
     <View style={styles.container}>
       {/* @ts-ignore */}
-      <Text style={isDarkMode ? styles.streakTextDark : styles.streakText}>
-        Streak
-      </Text>
-      <Text style={isDarkMode ? styles.streakTextDark : styles.streakText}>
-        {streakDays}{' '}
-        {streakDays == 0 ? 'days' : streakDays > 1 ? 'days' : 'day'}
-      </Text>
+      <View style={isDarkMode ? styles.circleDark : styles.circle}>
+        <Text
+          style={
+            isDarkMode ? styles.streakTextHeaderDark : styles.streakTextHeader
+          }>
+          Streak
+        </Text>
+        <Text style={isDarkMode ? styles.streakTextDark : styles.streakText}>
+          {streakDays}{' '}
+          {streakDays == 0 ? 'days' : streakDays > 1 ? 'days' : 'day'}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -31,12 +36,44 @@ export default StreakHeader;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 10,
+    textAlign: 'center',
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circle: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: 'black',
+  },
+  circleDark: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: 'white',
+  },
+  streakTextHeader: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 5,
+    color: 'white',
   },
   streakText: {
     textAlign: 'center',
     fontSize: 40,
     marginTop: 5,
+    color: 'white',
+  },
+  streakTextHeaderDark: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 5,
+    color: 'black',
   },
   cardDarkMode: {
     backgroundColor: 'black',
@@ -44,7 +81,7 @@ const styles = StyleSheet.create({
   streakTextDark: {
     textAlign: 'center',
     fontSize: 40,
-    color: 'white',
+    color: 'black',
     marginTop: 5,
   },
 });

@@ -1,5 +1,6 @@
 import {SpeedDial} from '@rneui/base';
 import React from 'react';
+import {useColorScheme} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {storeToken} from '../services/accessToken.service';
 import {
@@ -10,6 +11,8 @@ import {
 import {auth0} from './Authentication';
 
 const ActionFab = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+  console.log(useColorScheme());
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
 
@@ -28,29 +31,33 @@ const ActionFab = () => {
   return (
     <SpeedDial
       isOpen={open}
-      icon={{name: 'edit', color: '#fff'}}
-      openIcon={{name: 'close', color: '#fff'}}
+      color={isDarkMode ? 'white' : 'black'}
+      icon={{name: 'edit', color: isDarkMode ? 'black' : 'white'}}
+      openIcon={{name: 'close', color: isDarkMode ? 'black' : 'white'}}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}>
       <SpeedDial.Action
-        icon={{name: 'add', color: '#fff'}}
+        icon={{name: 'add', color: isDarkMode ? 'black' : 'white'}}
         title="Add"
+        color={isDarkMode ? 'white' : 'black'}
         onPress={async () => {
           setOpen(false);
           dispatch(setAddItemDialogVisible(true));
         }}
       />
       <SpeedDial.Action
-        icon={{name: 'calendar-today', color: '#fff'}}
+        icon={{name: 'calendar-today', color: isDarkMode ? 'black' : 'white'}}
         title="Check-In"
+        color={isDarkMode ? 'white' : 'black'}
         onPress={() => {
           setOpen(false);
           dispatch(setCheckinDialogVisible(true));
         }}
       />
       <SpeedDial.Action
-        icon={{name: 'calendar-today', color: '#fff'}}
+        icon={{name: 'logout', color: isDarkMode ? 'black' : 'white'}}
         title="Logout"
+        color={isDarkMode ? 'white' : 'black'}
         onPress={() => {
           setOpen(false);
           onLogout();

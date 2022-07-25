@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     elevation: 2,
     height: 90,
     width: 200,
-    backgroundColor: '#2196F3',
+    backgroundColor: 'white',
   },
-  buttonText: {color: 'white', fontSize: 25},
+  buttonText: {color: 'black', fontSize: 25},
   centeredView: {
     alignItems: 'center',
     justifyContent: 'center',

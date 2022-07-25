@@ -1,4 +1,5 @@
 import {Text} from '@rneui/base';
+import {withTheme} from '@rneui/themed';
 import React from 'react';
 import {Modal, Pressable, StyleSheet, TextInput, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: 'black',
   },
   textStyle: {
     color: 'white',

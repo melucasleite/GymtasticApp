@@ -1,6 +1,6 @@
 import {AnyAction} from '@reduxjs/toolkit';
 import React from 'react';
-import {useColorScheme} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 import {Colors, Drawer, Text, View} from 'react-native-ui-lib';
 import {useDispatch} from 'react-redux';
 import {deleteExercise} from '../state/actions/deleteExercise';
@@ -42,7 +42,7 @@ const ItemView = ({item}: {item: Item}) => {
           padding-s4
           bg-white={!isDarkMode}
           bg-black={isDarkMode}
-          style={{height: 60}}>
+          style={styles(isDarkMode).itemView}>
           <Text text70 white={isDarkMode}>
             {item.name} - {item.sets} x {item.reps} x {item.weigth}Lb
           </Text>
@@ -51,5 +51,12 @@ const ItemView = ({item}: {item: Item}) => {
     </>
   );
 };
+
+const styles = (isDarkMode: boolean) =>
+  StyleSheet.create({
+    itemView: {
+      height: 60,
+    },
+  });
 
 export default ItemView;

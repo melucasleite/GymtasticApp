@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8005/api';
+const API_URL = 'https://gymtastic-api-214.herokuapp.com/api';
 import axios from 'axios';
 import {Item} from '../components/ItemView';
 import {getToken} from './accessToken.service';
